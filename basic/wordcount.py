@@ -38,6 +38,43 @@ print_words() and print_top().
 """
 
 import sys
+import string
+
+def print_words(filename):
+	dict = {}
+	file = open(filename,'r')
+	for line in file:
+		line=line.strip()
+		for p in line.split(" "):
+			p=''.join( c for c in p if c not in string.punctuation)
+			if(dict.has_key(p)):
+				dict[p]=dict[p]+1
+			else:
+				dict[p]=1
+				
+	
+	for item in dict:
+		print item+' :'+str(dict[item])
+	
+	return 
+	
+def print_top(filename):
+	dict = {}
+	file = open(filename,'r')
+	for line in file:
+		line=line.strip()
+		for p in line.split(" "):
+			p=''.join( c for c in p if c not in string.punctuation)
+			if(dict.has_key(p)):
+				dict[p]=dict[p]+1
+			else:
+				dict[p]=1
+	res = sorted(dict, key=dict.__getitem__, reverse=True)
+	for p in range(0,30):
+		print res[p]+' :'+str(dict[res[p]])
+	
+	return 
+
 
 # +++your code here+++
 # Define print_words(filename) and print_top(filename) functions.
