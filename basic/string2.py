@@ -1,4 +1,4 @@
-#!/usr/bin/python2.4 -tt
+#!/usr/bin/python2.7 -tt
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
 # http://www.apache.org/licenses/LICENSE-2.0
@@ -14,10 +14,27 @@
 # Unless it already ends in 'ing', in which case
 # add 'ly' instead.
 # If the string length is less than 3, leave it unchanged.
+
 # Return the resulting string.
+import string
 def verbing(s):
+	if len(s)<3:
+		return s 
+	else:
+		if(s[-3:]=='ing'):
+			list1 = list(s)
+			list1.append('l')
+			list1.append('y')
+			return ''.join(list1)
+		else:
+			list2 = list(s)
+			list2.append('i')
+			list2.append('n')
+			list2.append('g')
+			return ''.join(list2)
+	
   # +++your code here+++
-  return
+
 
 
 # E. not_bad
@@ -29,8 +46,24 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
+	ilist = s.split(" ")
+	ilist1 = [''.join(c for c in str1 if c not in string.punctuation) for str1 in ilist]
+	if (('bad' in ilist1) and ('not' in ilist1)):
+		index1 =ilist1.index('not')
+		index2 =ilist1.index('bad')
+		if(index1<index2):
+			temp = ilist[index2]
+			del ilist[index1+1:index2+1]
+			if(len(temp)>3):
+				ilist[index1]='good'+temp[3:]
+			else:
+				ilist[index1]='good'
+			return ' '.join(ilist)
+		else:
+			return s
+	else:
+		return s
   # +++your code here+++
-  return
 
 
 # F. front_back
@@ -41,8 +74,7 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-  # +++your code here+++
-  return
+	return
 
 
 # Simple provided test() function used in main() to print
